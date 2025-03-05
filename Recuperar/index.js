@@ -80,7 +80,7 @@ function renderCalendar() {
       dayCell.style.backgroundColor = "yellow";
 
       const selectedMonthYear = currentDate.toLocaleString('default', { month: 'long', year: 'numeric' });
-  selectedDateDisplay.innerHTML = `For remainder: ${i} ${selectedMonthYear}`;
+  selectedDateDisplay.innerHTML = `${i} ${selectedMonthYear}`;
 
 
       // Store the current clicked day to lastClickedDay for future resets
@@ -105,6 +105,7 @@ function changeMonth(increment) {
 
 // Initialize the calendar
 renderCalendar();
+const selected_date=selectedDateDisplay.innerHTML;
 const inputRemainder = document.getElementById('input_remainder');
 let isFocused = false;
 
@@ -114,13 +115,13 @@ inputRemainder.addEventListener('focus', function() {
 });
 
 // Add an event listener for the blur event
-
 inputRemainder.addEventListener('blur', function() {
     // Check if the field had text when losing focus and was focused before
     const textData = inputRemainder.value;
+    const selected_date = selectedDateDisplay.innerHTML.trim(); // Get the date value from selectedDateDisplay
 
     if (isFocused && textData.trim()) { // Check if there is non-empty text and input was focused
-        submitRemainder(textData);
+        submitRemainder(textData, selected_date);
     } else if (textData.trim() === '') { // Check if it's empty, trigger delete
         deleteRemainder();  // Trigger delete if the input is cleared
     }
@@ -130,28 +131,39 @@ inputRemainder.addEventListener('blur', function() {
 });
 
 // Function to submit remainder
-function submitRemainder(textData) {
+function submitRemainder(textData, selected_date) {
+    // Ensure the date format is correct for the database (e.g., YYYY-MM-DD)
+    const formattedDate = new Date(selected_date).toISOString().split('T')[0]; // Converts to 'YYYY-MM-DD'
+
     fetch('remainder.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ remainder_text: textData })
+        body: JSON.stringify({ remainder_text: textData, selected_date: formattedDate }), // Send formatted date
     })
-    .then(response => response.text())
+    .then(response => response.json())  // Handle JSON response
     .then(data => {
-        // Use SweetAlert to show a success message
-        Swal.fire({
-            icon: 'success',
-            title: 'Success',
-            text: 'Remainder submitted successfully!',
-        });
+        // Check if there is an error in the response
+        if (data.error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: data.error,
+            });
+        } else {
+            // Show success message
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Remainder submitted successfully!',
+            });
 
-        inputRemainder.value = ''; // Clear input field after submission
+            inputRemainder.value = ''; // Clear input field after submission
+        }
     })
     .catch((error) => {
         console.error('Error:', error);
-        // Optionally show an error alert in case of failure
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
@@ -280,11 +292,6 @@ function showTextareaOnClick() {
               });
           } else {
               // Success handler
-              Swal.fire({
-                  icon: 'success',
-                  title: 'Remainder Updated',
-                  text: 'Remainder updated successfully!',
-              });
               Swal.fire({
                   icon: 'success',
                   title: 'Remainder Updated',

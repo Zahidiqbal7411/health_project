@@ -4,31 +4,39 @@ ini_set('display_errors', 1);
 require_once('conn.php'); // Assuming this file contains your DB connection
 
 // Part 1: Insert remainder data
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the JSON input
     $data = json_decode(file_get_contents('php://input'), true);
 
-    // Check if the 'remainder_text' field is set
-    if (isset($data['remainder_text'])) {
+    // Check if the 'remainder_text' and 'selected_date' fields are set
+    if (isset($data['remainder_text']) && isset($data['selected_date'])) {
         $remainderText = $conn->real_escape_string($data['remainder_text']); // Escape special characters for SQL
+        $selected_date = $conn->real_escape_string($data['selected_date']); // Ensure the date is properly escaped
 
-        // Prepare the SQL statement
-        $sql = "INSERT INTO remainder (remainder_text) VALUES ('$remainderText')";
+        // Validate that the selected_date is in a valid format (YYYY-MM-DD)
+        if (DateTime::createFromFormat('Y-m-d', $selected_date) !== false) {
+            // Prepare the SQL statement
+            $sql = "INSERT INTO remainder (remainder_text, selected_date) VALUES ('$remainderText', '$selected_date')";
 
-        // Execute the query
-        if ($conn->query($sql) === TRUE) {
-            // Respond with success
-            echo json_encode([
-                'message' => 'Data inserted successfully',
-                'id' => $conn->insert_id, // Return the ID of the inserted row
-            ]);
+            // Execute the query
+            if ($conn->query($sql) === TRUE) {
+                // Respond with success
+                echo json_encode([
+                    'message' => 'Data inserted successfully',
+                    'id' => $conn->insert_id, // Return the ID of the inserted row
+                ]);
+            } else {
+                // Respond with an error if the insertion fails
+                echo json_encode(['error' => 'Error inserting data: ' . $conn->error]);
+            }
         } else {
-            // Respond with an error if the insertion fails
-            echo json_encode(['error' => 'Error inserting data: ' . $conn->error]);
+            // If the date format is invalid
+            echo json_encode(['error' => 'Invalid date format. Expected format: YYYY-MM-DD']);
         }
     } else {
-        // Respond with an error if 'remainder_text' is not set
-        echo json_encode(['error' => 'No remainder_text provided']);
+        // Respond with an error if 'remainder_text' or 'selected_date' is not set
+        echo json_encode(['error' => 'Missing required fields: remainder_text or selected_date']);
     }
 }
 
