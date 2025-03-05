@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5, minimum-scale=1">
+
+
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- custom css -->
+  <link rel="stylesheet" href="assets/page2.css">
+
+  <!-- fontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
+  <!-- media Queries css-->
+  <link rel="stylesheet" href="assets/media-queries.css">
+
+  <title>Recuperar</title>
+  <style>
+    .notifications-badge {
+      width: 18px;
+      height: 18px;
+      position: absolute;
+      top: -3px;
+      right: -2px;
+      background-color: black;
+      color: white;
+      font-size: 11px;
+      font-weight: bold;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+    }
+
+    .desc-icons {
+      width: 26px;
+      height: 25px;
+      border: 2px solid #4E4E4E !important;
+      color: #4E4E4E;
+      padding: 6px;
+      transition: borer-color ease-in-out;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .ml-text {
+      margin-left: 4px;
+      display: inline-block;
+    }
+
+    /* stepper */
+    .desccheckbox label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      color: black;
+    }
+
+    .desccheckbox input {
+      width: 24px;
+      height: 24px;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-color: white;
+      border: 2px solid #00B475 !important;
+      border-radius: 50%;
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .desccheckbox input:checked {
+      background: radial-gradient(circle, #00B475 50%, white 30%);
+    }
+
+    .desccheckbox input:checked::after {
+      content: '';
+      font-size: 16px;
+      color: white;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .stepper-item .lines {
+      width: 16px !important;
+      height: 1px;
+      background-color: #00B475;
+      flex-grow: 0.1;
+    }
+
+    .description-sub-button button:focus {
+      box-shadow: none;
+      outline: none;
+    }
+
+    /* step-item */
+    .stepper-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+      overflow-x: hidden;
+      margin-top: 10px;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .step-item input[type="checkbox"] {
+      width: 28px !important;
+      height: 28px !important;
+      border: 1px solid #00B475;
+      border-radius: 50%;
+      appearance: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      transition: 0.3s;
+    }
+
+    .step-item input[type="checkbox"]:checked {
+      background-color: #00B475;
+      border-color: #00B475;
+    }
+
+    .step-item input[type="checkbox"]::after {
+      content: '\2713' !important;
+      font-size: 14px;
+      color: white !important;
+      font-weight: bold;
+      display: none;
+      position: absolute;
+    }
+
+    .step-item input[type="checkbox"]:checked::after {
+      display: block;
+    }
+
+    .step-item label {
+      font-size: 11px;
+      color: #00B475;
+      white-space: nowrap;
+    }
+
+    .step-item .lines {
+      width: 10px;
+      height: 1px;
+      background-color: #00B475;
+      /* flex-grow: 0.3; */
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand" href="#">
+        <img src="./assets/images/logo.png" alt="Logo">
+      </a>
+      <!-- Toggle button for mobile -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"><span></span></span>
+      </button>
+
+      <!-- Navbar Links + Right Side Items (inside the collapse) -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-5 p-5 mb-2 mb-lg-0 w-100">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Necessidade</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Gestão de Contrato</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Orçamento</a>
+          </li>
+        </ul>
+
+        <!-- Right Side Items (Move inside the menu on mobile) -->
+        <div class="d-flex align-items-center  right-items">
+          <div class="position-relative">
+            <i class="fa-regular fa-bell me-2 mt-1 bell-icon" style="color: black; font-size: 22px;"></i>
+            <span class="notifications-badge">3</span> <!-- Notification Badge -->
+          </div>
+          <i class="fa-regular fa-bell me-2 mt-1" style=" color: white; font-size: 22px;"></i>
+          <img src="./assets/images/Ellipse 6.png" alt="Profile" class="profile-img mx-2">
+
+          <div class="dropdown">
+            <button class="btn btn-primary-light lang-toggle" type="button" data-bs-toggle="dropdown">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Portugal.svg" width="20"> PT <i
+                class="fa-solid fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">English</a></li>
+              <li><a class="dropdown-item" href="#">Português</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- hero -->
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="progress-headings d-flex justify-content-between mt-5">
+          <h5>
+            <!-- <i class="fa-solid fa-arrow-left fw-bold desc-icons"></i> -->
+            <img src="./assets/images/Icons/arrow-Icon-1.png" alt="">
+            <strong><span class="ml-text">Nome do objeto / <span class="text-primary">Fluxo de
+                  Contratação</span></span></strong>
+          </h5>
+          <div class="progress-arrow">
+            <i class="fa-solid fa-angles-right"></i>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Progress Tracker -->
+      <div class="container p-0 ms-2">
+        <div class="stepper-wrapper">
+          <div class="step-item">
+            <input type="checkbox" id="steps1" checked>
+            <label for="steps1">Passo 1</label>
+            <div class="lines"></div>
+          </div>
+          <div class="step-item">
+            <input type="checkbox" id="steps2" checked>
+            <label for="steps2">Passo 2</label>
+            <div class="lines"></div>
+          </div>
+          <div class="step-item">
+            <input type="checkbox" id="steps3" checked>
+            <label for="steps3">Passo 3</label>
+            <div class="lines"></div>
+          </div>
+          <div class="step-item">
+            <input type="checkbox" id="steps4">
+            <label for="steps4">Passo 4</label>
+            <div class="lines"></div>
+          </div>
+          <div class="step-item">
+            <input type="checkbox" id="steps5">
+            <label for="steps5">Passo 5</label>
+            <div class="lines"></div>
+          </div>
+          <div class="step-item">
+            <input type="checkbox" id="steps6">
+            <label for="steps6">Passo 6</label>
+            <div class="lines"></div>
+          </div>
+          <div class="step-item">
+            <input type="checkbox" id="steps7">
+            <label for="steps7">Passo 7</label>
+            <div class="lines"></div>
+          </div>
+          <div class="step-item">
+            <input type="checkbox" id="steps8">
+            <label for="steps8">Passo 8</label>
+            <div class="lines"></div>
+          </div>
+          <div class="step-item">
+            <input type="checkbox" id="steps9">
+            <label for="steps9">Passo 9</label>
+            <div class="lines"></div>
+          </div>
+          <div class="step-item">
+            <input type="checkbox" id="steps10">
+            <label for="steps10">Passo 10</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mt-3">
+          <h6><strong class="mt-1" style="font-size: 22px;">Leilão</strong></h6>
+        </div>
+        <div class="col-md-6 mt-3">
+          <p class="text-muted d-flex justify-content-end">Due date: 31/01/2025</p>
+
+          <!-- Custom Dropdown -->
+          <!-- <div class="dropdown custom-dropdown">
+            <button class="btn btn-light dropdown-toggle mb-3" type="button" id="dropdownMenuButton"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="assets/images/Ellipse 24.png" class="rounded-circle me-2" alt="User" width="30" height="30">
+              <span>Select Assignee...</span>
+              <i class="fa-solid fa-angle-down ms-5"></i>
+            </button>
+
+
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <img src="assets/images/Ellipse 24.png" class="rounded-circle me-2" width="30" height="30"
+                    alt="User 1">
+                  Muneeb khan
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <img src="assets/images/Ellipse 24.png" class="rounded-circle me-2" width="30" height="30"
+                    alt="User 2">
+                  Atif ahmad
+                </a>
+              </li>
+            </ul>
+          </div> -->
+        </div>
+        <div class="desccheckbox">
+          <label>
+            <input type="radio" id="radio1" name="descCheck" value="sim" checked>
+            <span style="font-size: 11px; font-weight: normal;">Sim ir a leilão</span>
+          </label>
+          <label>
+            <input type="radio" id="radio2" name="descCheck" value="nao">
+            <span style="font-size: 11px; font-weight: normal;">Não ir a leilão</span>
+          </label>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <!-- description section -->
+
+  <section class="description">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="description-label">
+            <label for="description">Descrição</label>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="description-input mt-4">
+            <input type="text" class="form-control" id="description-input">
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="description-label mt-4">
+            <label for="description">Anexar Documentos</label>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="fileUpload-input mt-4 mb-3">
+            <div class="input-border">
+              <input type="file" id="file-input" class="form-control">
+            </div>
+            <label for="file-input" class="upload-label">
+              <i class="fas fa-upload"></i> <!-- FontAwesome Upload Icon -->
+            </label>
+            <span class="fw-bold" style="position: absolute; top: 78%; left: 32%; color: #3F8045; margin-top: -10px;">
+              Clicar para fazer upload <span class="text-muted">ou arrastar e soltar</span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- buttons row -->
+      <div class="row">
+        <div class="col-12">
+          <div class="description-sub-button d-flex justify-content-between">
+            <button type="button" class="btn btn-outline p-2" style="border: 1px solid #00B475;color: #00B475"> <span
+                class="me-3"><i class="fa-solid fa-arrow-left desc-icons1"></i></span>Anterior</button>
+            <button type="button" class="btn btn-success p-2"> Anterior <span><i
+                  class="fa-solid fa-arrow-right desc-icons2" style="border: 2px solid white;"></i></span></button>
+          </div>
+        </div>
+      </div>
+      <!-- details row -->
+      <div class="row">
+        <div class="col-12">
+          <div class="details-heading mt-4">
+            <h5 class="fw-bold" style="color: #4E4E4E;">Detalhes da Necessidade</h5>
+          </div>
+        </div>
+      </div>
+
+      <!-- card row -->
+      <div class="row g-5  mb-4" style="margin-top: -14px;">
+        <div class="col-sm-12 col-md-4 col-lg-2">
+          <div class="card details-card p-2">
+            <div class="card-img d-flex justify-content-center py-3">
+              <img src="./assets/images/Icons/file-text-o.png" alt="">
+            </div>
+            <div class="card-title">
+              <p class="text-center">Manifestação da Necessidade</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-2">
+          <div class="card details-card p-2">
+            <div class="card-img d-flex justify-content-center py-3">
+              <img src="./assets/images/Icons/euro.png" alt="">
+            </div>
+            <div class="card-title">
+              <p class="text-center">Manifestação da Necessidade</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-2">
+          <div class="card details-card p-2">
+            <div class="card-img d-flex justify-content-center py-3">
+              <img src="./assets/images/Icons/tree.png" alt="">
+            </div>
+            <div class="card-title">
+              <p class="text-center">Manifestação da Necessidade</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-2">
+          <div class="card details-card p-2">
+            <div class="card-img d-flex justify-content-center py-3">
+              <img src="./assets/images/Icons/files-o.png" alt="">
+            </div>
+            <div class="card-title">
+              <p class="text-center">Manifestação da Necessidade</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-2">
+          <div class="card details-card p-2">
+            <div class="card-img d-flex justify-content-center py-3">
+              <img src="./assets/images/Icons/briefcase.png" alt="">
+            </div>
+            <div class="card-title">
+              <p class="text-center">Manifestação da Necessidade</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-2">
+          <div class="card details-card p-2">
+            <div class="card-img d-flex justify-content-center py-3">
+              <img src="./assets/images/Icons/area-chart.png" alt="">
+            </div>
+            <div class="card-title">
+              <p class="text-center">Manifestação da Necessidade</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-2">
+          <div class="card details-card p-2">
+            <div class="card-img d-flex justify-content-center py-3">
+              <img src="./assets/images/Icons/paste2.png" alt="">
+            </div>
+            <div class="card-title">
+              <p class="text-center">Manifestação da Necessidade</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- footer section -->
+
+  <footer style="background-color: #172629;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mt-5">
+          <h3 class="fw-bold" style="color: white; border-bottom: 1px solid white; display: inline-block;">contacte-nos
+          </h3>
+        </div>
+
+        <div class="col-md-8 mt-5">
+          <div class="quick-links">
+            <a href=""> <span>TERMOS E CONDIÇÕES</span></a>
+            <a href=""> <span>POLÍTICA DE PRIVACIDADE</span></a>
+            <a href=""> <span>POLÍTICA DE COOKIES</span></a>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col-12">
+            <div class="social-links">
+              <a href=""> <i class="fa-brands fa-youtube"></i></a>
+              <a href=""><i class="fa-brands fa-facebook"></i></a>
+              <a href=""> <i class="fa-brands fa-linkedin"></i></a>
+              <a href=""> <i class="fa-brands fa-twitter"></i></a>
+              <a href=""> <i class="fa-brands fa-instagram"></i></a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- custom js -->
+  <script src="index.js"></script>
+
+</body>
+
+</html>

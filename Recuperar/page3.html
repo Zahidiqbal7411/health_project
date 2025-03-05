@@ -1,0 +1,969 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5, minimum-scale=1">
+
+
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- custom css -->
+  <!-- <link rel="stylesheet" href="assets/style.css"> -->
+
+  <!-- fontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
+  <!-- media Queries css-->
+  <link rel="stylesheet" href="assets/media-queries.css">
+
+
+  <title>Recuperar</title>
+</head>
+
+<style>
+  /* google webFonts */
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+
+  /* globally target */
+  * {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: "Open Sans", serif;
+  }
+
+  /* navbar */
+  .navbar {
+    height: 80px;
+    width: 100%;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+  }
+
+  .navbar-nav {
+    display: flex;
+    gap: 25px;
+  }
+
+  .navbar a {
+    color: black !important;
+  }
+
+  .navbar-brand img {
+    width: 63px;
+    height: 63px;
+
+  }
+
+  .navbar-toggler {
+    border: none;
+  }
+
+  .navbar-toggler:focus {
+    box-shadow: none;
+  }
+
+  .profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  .lang-toggle:hover {
+    background-color: transparent;
+  }
+
+  .lang-toggle:focus {
+    outline: none;
+    box-shadow: none;
+
+  }
+
+  .lang-toggle {
+    border-radius: 40px;
+    width: 130px;
+    height: 44px;
+    padding: 5px;
+    border: 1px solid black;
+  }
+
+  .navbar-toggler-icon {
+    background-image: none !important;
+    /* Remove Bootstrap's default icon */
+    width: 30px;
+    height: 30px;
+    background-color: gray;
+    /* Change background color */
+    border-radius: 4px;
+    /* Optional: Rounded corners */
+    position: relative;
+  }
+
+  /* Create the three lines for the menu (hamburger) */
+  .navbar-toggler-icon::before,
+  .navbar-toggler-icon::after,
+  .navbar-toggler-icon span {
+    content: "";
+    position: absolute;
+    left: 50%;
+    width: 20px;
+    height: 2px;
+    background-color: white;
+    /* Change icon color */
+    transform: translateX(-50%);
+  }
+
+  .navbar-toggler-icon::before {
+    top: 8px;
+  }
+
+  .navbar-toggler-icon::after {
+    bottom: 8px;
+  }
+
+  .navbar-toggler-icon span {
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+
+  .dropdown-menu {
+    background-color: #92b8d4;
+  }
+
+  .dropdown-item:hover {
+    background-color: #1a90e4;
+  }
+
+  .desc-icons-object {
+    border: 1px solid #3F8045;
+    color: #00B475;
+    padding: 6px;
+    transition: borer-color ease-in-out;
+    border-radius: 50%;
+    font-size: 11px;
+  }
+
+  .progress-Data h5 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .stepper-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 10px;
+  }
+
+  .stepper-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .stepper-item input[type="checkbox"] {
+    width: 28px !important;
+    height: 28px !important;
+    border: 2px solid #00B475;
+    border-radius: 50%;
+    appearance: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: 0.3s;
+  }
+
+  .stepper-item input[type="checkbox"]:checked {
+    background-color: #00B475;
+    border-color: #00B475;
+  }
+
+  .stepper-item input[type="checkbox"]::after {
+    content: '\2713' !important;
+    /* Unicode checkmark */
+    font-size: 14px;
+    color: white !important;
+    font-weight: bold;
+    display: none;
+    position: absolute;
+  }
+
+  .stepper-item input[type="checkbox"]:checked::after {
+    display: block;
+  }
+
+  .stepper-item label {
+    margin-left: 8px;
+    font-size: 12px;
+    color: #00B475;
+    font-weight: bold;
+  }
+
+  .stepper-item .line {
+    width: 20px;
+    margin-left: 13px;
+    max-width: 70px;
+    height: 2px;
+    background-color: #00B475;
+    flex-grow: 1;
+
+  }
+
+  /* sub-progress */
+  .sub-progress-stepper .stepper-item input[type="checkbox"] {
+    width: 28px !important;
+    height: 28px !important;
+    border: 2px solid black;
+    border-radius: 50%;
+    appearance: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: 0.3s;
+    padding: 8px 0px 8px 0px;
+  }
+
+  .sub-progress-stepper .stepper-item input[type="checkbox"]:checked {
+    background-color: black;
+  }
+
+  .sub-progress-stepper .stepper-item .line {
+    height: 2px;
+    background-color: #4E4E4E;
+    flex-grow: 0.3;
+    margin-left: 4px;
+  }
+
+  .sub-progress-stepper label {
+    font-size: 11px;
+    color: #4E4E4E;
+  }
+
+
+  /* dropdown */
+  .custom-dropdown2 {
+    display: flex;
+    align-items: center;
+  }
+
+  .custom-dropdown2 .dropdown-toggle {
+    display: flex !important;
+    align-items: center;
+    width: 279px;
+    height: 44px;
+    background: transparent;
+    border-radius: 24px;
+    border: 1px solid black;
+
+  }
+
+  .custom-dropdown2 .dropdown-toggle:focus {
+    box-shadow: none;
+    outline: none;
+
+  }
+
+  /* juri table */
+
+
+  .juri-table {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .juri-table thead {
+    background-color: #009A9F;
+    color: white;
+    font-size: 14px !important;
+    text-align: justify;
+  }
+
+  .juri-table tr td {
+    text-align: justify;
+    font-size: 14px;
+  }
+
+  .juri-table thead tr:first-child th:first-child {
+    border-top-left-radius: 8px !important;
+    border-bottom-left-radius: 8px !important;
+  }
+
+  .juri-table thead tr:first-child th:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+
+  .juri-table tbody tr td:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+
+  .juri-table tbody tr td:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+
+  .juri-table th {
+    padding: 12px;
+  }
+
+  .juri-table tbody tr:nth-child(odd) {
+    background-color: #F2FDFD;
+  }
+
+  .juri-table tbody tr {
+    border-radius: 8px !important;
+  }
+
+  .notifi-badge {
+    width: 18px;
+    /* Slightly larger for better centering */
+    height: 18px;
+    position: absolute;
+    top: -3px;
+    right: -2px;
+    background-color: #00B475;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lang-toggle:focus {
+    box-shadow: none;
+    outline: none;
+  }
+
+  .description-lab {
+    width: 100%;
+    height: 54px;
+    background-color: #00B475;
+    height: 50px;
+    border-radius: 8px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    color: white;
+    font-weight: 500;
+
+  }
+
+  .custom-dropdown2 button {
+    border: 1px solid #3F8045;
+  }
+
+  .custom-dropdown2 .dropdown-toggle::after {
+    display: none !important;
+  }
+
+  /* switch on/off toggle */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 52px;
+    height: 30px;
+  }
+
+  .switch input {
+    opacity: 1;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #00B475;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 24px;
+    width: 24px;
+    bottom: 3px;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+
+  input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+    background-color: white;
+  }
+
+  .to-add button {
+    width: 170px;
+    height: 44px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 22px;
+  }
+
+  .Criteria-input input {
+    height: 62px;
+  }
+
+  .Criteria-input input:focus {
+    box-shadow: none;
+    outline: none;
+  }
+
+  /* upload data  input */
+  .fileUpload-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+    position: relative;
+    width: 100%;
+  }
+
+  .input-border {
+    border: 2px dotted gray;
+    width: 100%;
+    height: 104px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+  }
+
+  input[type="file"] {
+    display: none;
+
+  }
+
+  .upload-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: background 0.3s ease;
+  }
+
+  .upload-label img {
+    width: 22px;
+    height: 18px;
+  }
+
+  .input-heading small {
+    position: absolute;
+    top: -7px;
+    /* left: 15px; */
+    background: white;
+    padding: 0 5px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .input-border {
+    position: relative;
+  }
+
+  .description-sub-button1 button {
+    width: 164px;
+    height: 44px;
+    border-radius: 22px;
+    border: 1px solid #00B475;
+    color: #00B475;
+  }
+
+  .description-sub-button2 button {
+    width: 164px;
+    height: 44px;
+    border-radius: 22px;
+    border: 1px solid #00B475;
+    /* color: #00B475; */
+  }
+
+  .social-links {
+    display: flex;
+    gap: 8px;
+    flex-wrap: nowrap;
+  }
+
+  .social-links a {
+    text-decoration: none !important;
+  }
+
+  .social-links i {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: white;
+    color: black !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3px 0;
+    transition: background-color 0.5s ease-in-out;
+  }
+
+  .social-links i:hover {
+    background-color: lightgrey !important;
+  }
+
+  .quick-links span {
+    display: block;
+    padding: 3px;
+    color: #FFFFFF;
+    font-size: 13px;
+  }
+
+  .quick-links a {
+    text-decoration: none !important;
+  }
+</style>
+
+<body>
+
+
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-lg ">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand" href="#">
+        <img src="./assets/images/logo.png" alt="Logo">
+      </a>
+
+      <!-- Toggle button for mobile -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"><span></span></span>
+      </button>
+
+
+      <!-- Navbar Links + Right Side Items (inside the collapse) -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-5 p-5 mb-2 mb-lg-0 w-100">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Necessidade</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Gestão de Contrato</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Orçamento</a>
+          </li>
+        </ul>
+
+        <!-- Right Side Items (Move inside the menu on mobile) -->
+        <div class="d-flex align-items-center  right-items">
+          <div class="position-relative">
+            <i class="fa-regular fa-bell me-2 mt-1 bell-icon" style="color: #00B475; font-size: 22px;"></i>
+            <span class="notifi-badge">3</span> <!-- Notification Badge -->
+          </div>
+          <img src="./assets/images/Ellipse 6.png" alt="Profile" class="profile-img mx-2">
+
+          <div class="dropdown">
+            <button class="btn btn-primary-light lang-toggle" type="button" data-bs-toggle="dropdown">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Portugal.svg" width="20"> PT <i
+                class="fa-solid fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">English</a></li>
+              <li><a class="dropdown-item" href="#">Português</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- hero -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <div class="progress-headings d-flex justify-content-between mt-5">
+          <h5>
+            <img src="./assets/images/Icons/Icon-3.png" alt="">
+            <strong><span class="ml-text">Nome do objeto / <span class="text-primary">Fluxo de
+                  Contratação</span></span></strong>
+          </h5>
+
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <div class="userNeed-data d-flex justify-content-end align-items-center" style="margin-top: 34px;">
+          <div class="user-id ">
+            <span class="me-lg-5">ID da necessidade: 123456</span>
+          </div>
+          <div class="progress-arrow d-flex justify-content-between">
+            <!-- <i class="fa-solid fa-angles-right ms-lg-5"></i> -->
+            <img src="./assets/images/Icons/Group-arrow.png" alt="" class="img-fluid"
+              style="width: 48px; height: 48px;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Progress Tracker -->
+  <section class="prog-tracker py-3" style="background-color:#F8F8F8;">
+    <div class="container">
+      <div class="stepper-wrapper">
+        <div class="stepper-item">
+          <input type="checkbox" id="step1" checked>
+          <label for="step1">1. Criação da Necessidade</label>
+          <div class="line"></div>
+        </div>
+        <div class="stepper-item">
+          <input type="checkbox" id="step2">
+          <label for="step2">2. Submissão pelo Requerente</label>
+          <div class="line"></div>
+        </div>
+        <div class="stepper-item">
+          <input type="checkbox" id="step3">
+          <label for="step3">3. Revisão do Dirigente</label>
+          <div class="line"></div>
+        </div>
+        <div class="stepper-item">
+          <input type="checkbox" id="step4">
+          <label for="step4">4. Aprovação pelo Núcleo</label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- sub progress tracker -->
+  <section class="sub-progress-stepper">
+    <div class="container">
+      <div class="stepper-wrapper mt-3">
+        <div class="stepper-item">
+          <input type="checkbox" id="step5" checked>
+          <label for="step5">Identificação da Entidade</label>
+          <div class="line"></div>
+        </div>
+        <div class="stepper-item">
+          <input type="checkbox" id="step6" checked>
+          <label for="step6">Identificação da Necessidade</label>
+          <div class="line"></div>
+        </div>
+        <div class="stepper-item">
+          <input type="checkbox" id="step7" checked>
+          <label for="step7">Condições da Necessidade</label>
+          <div class="line"></div>
+        </div>
+        <div class="stepper-item">
+          <input type="checkbox" id="step8">
+          <label for="step8">Características da Necessidade</label>
+        </div>
+        <div class="stepper-item">
+          <input type="checkbox" id="step8">
+          <label for="step8">Área de Revisão do Núcleo</label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="description-lab  mt-3">
+          <label for="description">Condições de Faturação</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12 mt-3">
+        <p class="" style="color: #3F8045; margin-bottom: 8px;">Condições de Faturação</p>
+
+        <!-- Custom Dropdown -->
+        <div class="dropdown custom-dropdown2">
+          <button class="btn btn-light dropdown-toggle mb-3 d-flex align-items-center justify-content-between"
+            type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="span-contents">60 Dias</span>
+            <i class="fa-solid fa-angle-down ms-5"></i>
+          </button>
+
+
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="#">
+                <img src="assets/images/Ellipse 24.png" class="rounded-circle me-2" width="30" height="30" alt="User 1">
+                Muneeb khan
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="#">
+                <img src="assets/images/Ellipse 24.png" class="rounded-circle me-2" width="30" height="30" alt="User 2">
+                Atif ahmad
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- description section -->
+  <div class="container mb-5">
+    <div class="row p-0">
+      <div class="col-12">
+        <div class="description-lab mt-2 py-2">
+          <label for="description">Júri do Procedimento</label>
+        </div>
+      </div>
+
+      <!-- table -->
+      <section class="container py-3">
+        <div class="table-responsive">
+          <table class="table table-hover juri-table text-center">
+            <thead>
+              <tr>
+                <th>Cargo</th>
+                <th>Nome</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Presidente</td>
+                <td>Lorem ipsum</td>
+                <td>Lorem ipsum</td>
+              </tr>
+              <tr>
+                <td>1° Vogal Efetivo</td>
+                <td>Lorem ipsum</td>
+                <td>Lorem ipsum</td>
+              </tr>
+              <tr>
+                <td>2° Vogal Efetivo</td>
+                <td>Lorem ipsum</td>
+                <td>Lorem ipsum</td>
+              </tr>
+              <tr>
+                <td>1° Vogal Suplente</td>
+                <td>Lorem ipsum</td>
+                <td>Lorem ipsum</td>
+              </tr>
+              <tr>
+                <td>2° Vogal Suplente</td>
+                <td>Lorem ipsum</td>
+                <td>Lorem ipsum</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <div class="col-12">
+        <div class="description-lab mt-4 py-2">
+          <label for="description">Critérios de Adjudicação</label>
+        </div>
+      </div>
+      <!-- switch on/off button -->
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="switch-btn-contents d-flex align-items-center mt-3 py-2">
+              <span style="color: #4E4E4E; font-weight: 500;">Avaliação Multifator?</span> <label class="switch ms-2">
+                <input type="checkbox" checked>
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="description-lab mt-4 py-2">
+          <label for="description">Fatores de Avaliação</label>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="to-add mt-3 py-2">
+          <div class="contents d-flex justify-content-between">
+            <h5 class="mt-1">Fatores de Avaliação</h5>
+            <button type="button" class="btn btn-primary ms-3" style="background-color: #00B475;">
+              <img src="./assets/images/Icons/plus.png" alt="">
+              Adicionar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- table 2 -->
+
+    <div class="table-responsive mt-2 py-2">
+      <table class="table table-hover juri-table text-center">
+        <thead>
+          <tr>
+            <th>Fatores</th>
+            <th>Descrição dos Fatores</th>
+            <th>Valoração</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Presidente</td>
+            <td>Lorem ipsum</td>
+            <td>Lorem ipsum</td>
+            <td><img src="./assets/images/Icons/Trash.png" alt=""></td>
+          </tr>
+
+
+
+        </tbody>
+      </table>
+    </div>
+    <div class="col-12">
+      <div class="description-lab mt-4 py-2">
+        <label for="description">Critério de Desempate</label>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="Criteria-input mt-4 py-2" style="width: 100%; height: 62px !important;">
+        <input type="text" class="form-control" id="Criteria">
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="description-lab mt-4 py-2">
+        <label for="description">Especificações Técnicas</label>
+      </div>
+    </div>
+
+
+    <!-- input data upload -->
+    <div class="col-12 mt-3 py-2">
+      <div class="input-heading position-relative">
+        <small>Anexar documentos</small> <!-- This will be positioned on the border -->
+      </div>
+      <div class="fileUpload-input mt-4 mb-3">
+        <div class="input-border">
+          <input type="file" id="file-input" class="form-control">
+        </div>
+        <label for="file-input" class="upload-label">
+          <img src="./assets/images/Icons/input-icon.png" alt="">
+        </label>
+        <span class="fw-bold"
+          style="position: absolute; top: 78%; left: 37%; color: #3F8045; margin-top: -10px; font-size: 14px;">
+          Clicar para fazer upload <span class="text-muted">ou arrastar e soltar</span>
+        </span>
+      </div>
+    </div>
+
+
+    <!-- buttons row -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="description-sub-button1 d-flex">
+          <button type="button" class="btn btn-outline p-2">
+            <img src="./assets/images/Icons/Leading Icon.svg" alt="">
+            Anterior</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="description-sub-button2 d-flex justify-content-end">
+          <button type="button" class="btn btn-light me-3" style="color: #4E4E4E; border: 1px solid #4E4E4E;">
+            <img src="./assets/images/Icons/save.png" alt=""> Anterior</button>
+
+          <button type="button" class="btn btn-success p-2" style="color: white;"> Anterior <span>
+              <img src="./assets/images/Icons/Icon-right-arrow.svg" alt="">
+              </i></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- footer section -->
+
+  <footer style="background-color: #172629;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mt-5">
+          <h3 class="fw-bold" style="color: white; border-bottom: 1px solid white; display: inline-block;">
+            contacte-nos
+          </h3>
+        </div>
+
+        <div class="col-md-8 mt-5">
+          <div class="quick-links">
+            <a href=""> <span>TERMOS E CONDIÇÕES</span></a>
+            <a href=""> <span>POLÍTICA DE PRIVACIDADE</span></a>
+            <a href=""> <span>POLÍTICA DE COOKIES</span></a>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col-12">
+            <div class="social-links">
+              <a href=""> <i class="fa-brands fa-youtube"></i></a>
+              <a href=""><i class="fa-brands fa-facebook"></i></a>
+              <a href=""> <i class="fa-brands fa-linkedin"></i></a>
+              <a href=""> <i class="fa-brands fa-twitter"></i></a>
+              <a href=""> <i class="fa-brands fa-instagram"></i></a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- custom js -->
+  <script src="index.js"></script>
+
+</body>
+
+</html>
