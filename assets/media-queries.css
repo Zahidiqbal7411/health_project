@@ -1,0 +1,246 @@
+/* Responsive: Move right-side items inside the navbar menu */
+@media (max-width: 992px) {
+  .navbar {
+    height: auto;
+  }
+
+  .navbar-collapse {
+    background: #92b8d4 !important;
+    ;
+    /* color: black; */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    /* padding: 10px; */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar-nav {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-item {
+    padding: 8px 0;
+  }
+
+  /* Move right-side items inside the toggle menu */
+  .right-items {
+    display: flex;
+    justify-content: center;
+    /* flex-direction: row; */
+    text-align: center;
+    margin-top: 5px;
+  }
+
+  .right-items i,
+  .right-items img,
+  .right-items .dropdown {
+    margin-bottom: 10px;
+  }
+
+  .profile-img {
+    width: 35px;
+    height: 35px;
+  }
+
+}
+
+/* defined min-width to details card */
+
+@media (min-width: 992px) {
+  .col-lg-2 {
+    flex: 0 0 auto;
+    width: 13.666667%;
+  }
+
+  .user-id span {
+    margin-right: 128px !important;
+  }
+}
+
+
+/* for medium screen */
+
+@media screen and (max-width:768px) {
+  .navbar-nav {
+    gap: 0px !important;
+    padding: 4px !important;
+    margin: 0px !important;
+    text-align: center !important;
+  }
+
+  .table-para {
+    font-size: 11px !important;
+    white-space: nowrap;
+  }
+
+  .table-date {
+    margin-top: 20px;
+    margin-left: 30px;
+  }
+
+  .calendar-card {
+    right: 30px;
+
+  }
+
+  .chart-container {
+    margin-bottom: 20px;
+  }
+
+  .chart-container h5 {
+    text-align: center !important;
+  }
+
+  .details-card {
+    width: 100% !important;
+    margin-left: 0px !important;
+    height: 150px;
+  }
+
+  #doughnutChart {
+    margin-left: 0px !important;
+  }
+
+  .candidate-btn1 {
+    margin-right: 0px !important;
+  }
+
+  .chart-container {
+    height: auto !important;
+  }
+
+  .mainBar {
+    flex-direction: column !important;
+    height: auto;
+  }
+
+  .barChart-items {
+    margin-bottom: 15px;
+    /* Space between legend and chart */
+  }
+
+  .step-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .step {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+
+  .line {
+    width: 5px;
+    height: 50px;
+  }
+
+  /* page 2 css */
+  .custom-dropdown {
+    /* background-color: red; */
+    margin-right: 15px;
+  }
+
+  .fileUpload-input span {
+    left: 12% !important;
+    font-size: 13px;
+  }
+
+  .data-table .table-head {
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .data-table tbody {
+    font-size: 13px;
+  }
+
+  .second-table .table-head {
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .second-table tbody {
+    font-size: 13px;
+  }
+
+  /* page 3 css */
+
+  .user-id span {
+    display: flex;
+    margin-right: 160px;
+    white-space: nowrap;
+  }
+
+  .stepper-wrapper .stepper-item label {
+    white-space: nowrap;
+  }
+
+  .sub-progress-stepper .stepper-item label {
+    white-space: nowrap;
+  }
+
+  .custom-dropdown2 button {
+    width: 100% !important;
+    margin-top: 10px;
+  }
+
+  .to-add .contents h5 {
+    font-size: 15px;
+    margin-top: 13px !important;
+  }
+
+  .userNeed-data {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .juri-table thead {
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .fileUpload-input span {
+    /* margin-left: -10px; */
+    left: 14% !important;
+  }
+
+  .description-sub-button1 button {
+    /* display: block; */
+    /* width: 80px !important; */
+    width: 100% !important;
+    height: 22px !;
+  }
+
+  .description-sub-button2 button {
+    margin-top: 20px;
+    display: flex;
+    margin-right: 40px;
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px !important;
+  }
+
+  /* sidebar */
+  #sidebar {
+    background-color: red !important;
+  }
+
+  .activity-card {
+    /* padding: 0px; */
+    margin-left: 50px !important;
+  }
+
+  #custom-card {
+    width: 100% !important;
+    margin-left: 0px !important;
+    height: 150px;
+  }
+}

@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5, minimum-scale=1">
+
+
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- custom css -->
+  <!-- <link rel="stylesheet" href="assets/style.css"> -->
+
+  <!-- fontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
+  <!-- media Queries css-->
+  <link rel="stylesheet" href="assets/media-queries.css">
+
+
+  <title>Recuperar</title>
+</head>
+
+<style>
+  /* google webFonts */
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+
+  /* globally target */
+  * {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: "Open Sans", serif;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* navbar */
+  .navbar {
+    height: 80px;
+    width: 100%;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+  }
+
+  .navbar-nav {
+    display: flex;
+    gap: 25px;
+  }
+
+  .navbar a {
+    color: black !important;
+  }
+
+  .navbar-brand img {
+    width: 63px;
+    height: 63px;
+
+  }
+
+  .navbar-toggler {
+    border: none;
+  }
+
+  .navbar-toggler:focus {
+    box-shadow: none;
+  }
+
+  .profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  .lang-toggle:hover {
+    background-color: transparent;
+  }
+
+  .lang-toggle:focus {
+    outline: none;
+    box-shadow: none;
+
+  }
+
+  .lang-toggle {
+    border-radius: 40px;
+    width: 130px;
+    height: 44px;
+    padding: 5px;
+    border: 1px solid black;
+  }
+
+  .navbar-toggler-icon {
+    background-image: none !important;
+    width: 30px;
+    height: 30px;
+    background-color: gray;
+    border-radius: 4px;
+    position: relative;
+  }
+
+  /* Create the three lines for the menu (hamburger) */
+  .navbar-toggler-icon::before,
+  .navbar-toggler-icon::after,
+  .navbar-toggler-icon span {
+    content: "";
+    position: absolute;
+    left: 50%;
+    width: 20px;
+    height: 2px;
+    background-color: white;
+    /* Change icon color */
+    transform: translateX(-50%);
+  }
+
+  .navbar-toggler-icon::before {
+    top: 8px;
+  }
+
+  .navbar-toggler-icon::after {
+    bottom: 8px;
+  }
+
+  .navbar-toggler-icon span {
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+
+  .dropdown-menu {
+    background-color: #92b8d4;
+  }
+
+
+
+
+  .notifi-badge {
+    width: 18px;
+    /* Slightly larger for better centering */
+    height: 18px;
+    position: absolute;
+    top: -3px;
+    right: -2px;
+    background-color: #00B475;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .needBtn1 {
+    width: 191px !important;
+    height: 44px !important;
+    border-radius: 22px;
+    background-color: #00B475 !important;
+    color: white !important;
+    font-weight: 500;
+    border: none;
+  }
+
+  .needBtn1:focus {
+    box-shadow: none;
+    outline: none;
+  }
+
+  .needBtn1:hover {
+    background: #00B475;
+
+  }
+
+  .needBtn2 {
+    width: 191px !important;
+    height: 44px !important;
+    border-radius: 22px;
+    background: transparent !important;
+    color: black !important;
+    border: 1px solid #4E4E4E !important;
+  }
+
+
+  .needBtn2:focus {
+    box-shadow: none;
+    outline: none;
+  }
+
+  .needBtn2:hover {
+    background: transparent;
+    color: black;
+    border: 1px solid #4E4E4E;
+  }
+
+  /* juri table */
+  .docs-table {
+    border-radius: 8px;
+    overflow: hidden;
+
+  }
+
+  .docs-table thead th {
+    text-align: center;
+    vertical-align: middle;
+    height: 53px;
+    /* Optional, only if necessary */
+  }
+
+
+  .docs-table thead {
+    background-color: #009A9F;
+    color: white;
+    font-size: 14px;
+  }
+
+  .docs-table thead tr:first-child th:first-child {
+    border-top-left-radius: 8px !important;
+    border-bottom-left-radius: 8px !important;
+  }
+
+  .docs-table thead tr:first-child th:last-child {
+    border-top-right-radius: 8px !important;
+    border-bottom-right-radius: 8px !important;
+  }
+
+  .juri-table tbody tr td:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+
+  .juri-table tbody tr td:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+
+  .juri-table th {
+    padding: 10px;
+  }
+
+  .juri-table tbody tr:nth-child(odd) {
+    background-color: #F2FDFD;
+  }
+
+  .juri-table tbody tr {
+    border-radius: 8px !important;
+  }
+
+
+
+
+  /* footer css */
+  .social-links {
+    display: flex;
+    gap: 8px;
+    flex-wrap: nowrap;
+  }
+
+  .social-links a {
+    text-decoration: none !important;
+  }
+
+  .social-links i {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: white;
+    color: black !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3px 0;
+    transition: background-color 0.5s ease-in-out;
+  }
+
+  .social-links i:hover {
+    background-color: lightgrey !important;
+  }
+
+  .quick-links span {
+    display: block;
+    padding: 3px;
+    color: #FFFFFF;
+    font-size: 13px;
+  }
+
+  .quick-links a {
+    text-decoration: none !important;
+  }
+
+  .card-header {
+    background: white;
+    border-radius: 14px !important;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 5);
+    /* Soft shadow */
+    padding: 15px;
+    transition: box-shadow 0.3s ease-in-out;
+    /* Smooth transition */
+  }
+</style>
+
+<body class="bg-light">
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-lg ">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand" href="#">
+        <img src="./assets/images/logo.png" alt="Logo">
+      </a>
+
+      <!-- Toggle button for mobile -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"><span></span></span>
+      </button>
+
+
+      <!-- Navbar Links + Right Side Items (inside the collapse) -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-5 p-5 mb-2 mb-lg-0 w-100">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Necessidade</a>
+          </li>
+          <li class="nav-item" style="position: relative; display: inline-block;">
+            <a class="nav-link" href="index.html"
+              style="border-bottom: 1px solid #4E4E4E; display: inline-block; padding: 6px 0; text-decoration: none;">
+              Gestão de Contrato
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Orçamento</a>
+          </li>
+        </ul>
+
+        <!-- Right Side Items (Move inside the menu on mobile) -->
+        <div class="d-flex align-items-center  right-items">
+          <div class="position-relative">
+            <i class="fa-regular fa-bell me-2 mt-1 bell-icon" style="color: #00B475; font-size: 22px;"></i>
+            <span class="notifi-badge">3</span> <!-- Notification Badge -->
+          </div>
+          <img src="./assets/images/Ellipse 6.png" alt="Profile" class="profile-img mx-2">
+
+          <div class="dropdown">
+            <button class="btn btn-primary-light lang-toggle" type="button" data-bs-toggle="dropdown">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Portugal.svg" width="20"> PT <i
+                class="fa-solid fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">English</a></li>
+              <li><a class="dropdown-item" href="#">Português</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container mt-4">
+    <div class="card" style="border: none;">
+      <div class="card-header d-flex align-items-center">
+        <button class="btn btn-link text-dark" data-bs-toggle="collapse" data-bs-target="#financeDocs">
+          <i class="bi bi-chevron-down"></i>
+        </button>
+        <div class="ms-2" style="border-radius: 16px;">
+          <img src="./assets/images/Icons/Icon-move.png" alt="">
+          <strong class="ms-1 mt-1">Gestão de Contrato</strong> <br>
+          <a href="#" class="text-primary text-decoration-none"
+            style="color: #4E4E4E !important; margin-left: 36px;">Documentos Financeiros</a>
+        </div>
+      </div>
+
+      <div id="financeDocs" class="collapse show mt-2">
+        <!-- Wrapper for responsiveness -->
+        <div class="table-responsive">
+          <table class="docs-table table table-borderless">
+            <thead>
+              <tr>
+                <th>Ver</th>
+                <th>Data</th>
+                <th>Objeto</th>
+                <th>Entidade</th>
+                <th>Requerente</th>
+                <th>Concluído</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="6" class="empty-message">Sem necessidades para este mês</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+
+
+<!-- footer section -->
+
+<footer style="background-color: #172629;  margin-top: auto;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mt-5">
+        <h3 class="fw-bold" style="color: white; border-bottom: 1px solid white; display: inline-block;">
+          contacte-nos
+        </h3>
+      </div>
+
+      <div class="col-md-8 mt-5">
+        <div class="quick-links">
+          <a href=""> <span>TERMOS E CONDIÇÕES</span></a>
+          <a href=""> <span>POLÍTICA DE PRIVACIDADE</span></a>
+          <a href=""> <span>POLÍTICA DE COOKIES</span></a>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-12">
+          <div class="media-icons"></div>
+          <div class="social-links">
+            <a href=""> <i class="fa-brands fa-youtube"></i></a>
+            <a href=""><i class="fa-brands fa-facebook"></i></a>
+            <a href=""> <i class="fa-brands fa-linkedin"></i></a>
+            <a href=""> <i class="fa-brands fa-twitter"></i></a>
+            <a href=""> <i class="fa-brands fa-instagram"></i></a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- custom js -->
+<script src="index.js"></script>
+
+</body>
+
+</html>
