@@ -24,6 +24,13 @@
 </head>
 
 <body>
+  <style>
+    .highlighted_date{
+      background-color:yellow !important;
+      color:black !important;
+
+    }
+  </style>
 
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg">
@@ -108,7 +115,7 @@
         <div id="selectedDateDisplay">
         <textarea id="input_remainder" class="form-control" style="display:none; border:none; border-radius:2px;" placeholder="Enter your remainder here" onclick="submitRemainder()"></textarea>
             <div id="remainder_div" ></div>
-            <textarea id="show_remainder" class="form-control" style="display:none; border:none; border-radius:2px;" placeholder="Enter your remainder for update" onclick="submitRemainder()"></textarea>
+            <textarea id="show_remainder" class="form-control" style="display:none; border:none; border-radius:2px;" placeholder="Enter your remainder for update" onclick="getRemainder()"></textarea>
         </div>
         <div style="display:none;">
         <h1>Remainders</h1>

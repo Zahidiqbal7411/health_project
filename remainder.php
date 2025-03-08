@@ -1,7 +1,8 @@
-
 <?php
 require_once('conn.php');
+
 $data = json_decode(file_get_contents('php://input'), true);
+
 if (isset($data['remainder_text']) && isset($data['selected_date'])) {
     $remainderText = $data['remainder_text'];
     $selectedDate = $data['selected_date'];
